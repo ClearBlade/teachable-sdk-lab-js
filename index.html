@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 <head>
   <title>Sample Publish App</title>
   <meta charset="utf-8">
@@ -30,6 +31,41 @@
           console.log("init failed")
         } else {
           connectToMessaging()
+=======
+  <head>
+    <title>Sample Publish App</title>
+    <meta charset="utf-8">
+    <metaname="viewport" content="width=device-width, initial-scale=1"/>
+      <link rel="stylsheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="index.js"></script>
+      <script type="text/javascript" src="mqttws31.js"></script>
+      <script>
+        var cb=new ClearBlade();
+        var topic="/CB Vending/Sensors/Weight/WS1";
+        var initOptions=
+        {
+          URI <IP_ADDRESS_OF_EDGE>,
+          messagingURI <HOSTNAME_EDGE>,
+          messagingPort <MESSAGE_PORT>,
+          useMQTT true,
+          cleanSession true
+          systemKey <EDGE_SYSTEM_KEY>,
+          systemSECRET<EDGE_SYSTEM_SECRET>,
+          emai: 'maintenance1@maintenance.com',
+          password: 'test'
+        };
+        var startup=function(){
+          var initCallback=function(err,data){
+            if(err){
+              console.log("init failed")
+            } else {
+              connectToMessaging()
+            }
+          };
+          initOptions.callback=initCallback; cb.init(initOptions);
+>>>>>>> 971e65ec16d2f6352bdbb7124f4f90375836030a
         }
       };
       initOptions.callback=initCallback; cb.init(initOptions);
