@@ -12,16 +12,17 @@
   <script>
     var cb=new ClearBlade();
     var topic="/CB Vending/Sensors/Weight/WS1";
+    // TODO Fill in <>s with your system configuration
     var initOptions=
     {
-      URI <IP_ADDRESS_OF_EDGE>,
-      messagingURI <HOSTNAME_EDGE>,
-      messagingPort <MESSAGE_PORT>,
-      useMQTT true,
-      cleanSession true
-      systemKey <EDGE_SYSTEM_KEY>,
-      systemSECRET<EDGE_SYSTEM_SECRET>,
-      emai: 'maintenance1@maintenance.com',
+      URI: <IP_ADDRESS_OF_EDGE>,
+      messagingURI: <HOSTNAME_EDGE>,
+      messagingPort: <MESSAGE_PORT>,
+      useMQTT: true,
+      cleanSession: true
+      systemKey: <EDGE_SYSTEM_KEY>,
+      systemSecret: <EDGE_SYSTEM_SECRET>,
+      email: 'maintenance1@maintenance.com',
       password: 'test'
     };
     var startup=function(){
