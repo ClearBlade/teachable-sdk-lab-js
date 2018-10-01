@@ -8,47 +8,43 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="index.js"></script>
-  <script type="text/javascript" src="mqttws31.js"></script>
   <script>
     var cb=new ClearBlade();
-    var topic="/CB Vending/Sensors/Weight/WS1";
     // TODO Fill in <>s with your system configuration
     var initOptions=
     {
-      URI: <IP_ADDRESS_OF_EDGE>,
-      messagingURI: <HOSTNAME_EDGE>,
-      messagingPort: <MESSAGE_PORT>,
-      useMQTT: true,
-      cleanSession: true
-      systemKey: <EDGE_SYSTEM_KEY>,
-      systemSecret: <EDGE_SYSTEM_SECRET>,
-      email: 'maintenance1@maintenance.com',
-      password: 'test'
+      URI: "<IP_ADDRESS_OF_EDGE>",
+      systemKey: "<SYSTEM_KEY>",
+      systemSecret: "<SYSTEM_SECRET>",
+      
+      email: 'test@clearblade.com',
+      password: 'clearblade',
+      callback: initCallback
     };
-    var startup=function(){
-      var initCallback=function(err,data){
-        if(err){
-          console.log("init failed")
-        } else {
-          connectToMessaging()
-        }
-      };
-      initOptions.callback=initCallback; cb.init(initOptions);
+
+    function startup(){
+      cb.init(initOptions);
     }
-    var connectToMessaging=function(){
-      var connectCallback=function(data){
-        console.log("connected to messaging");
-            //Write your code here
-          }
-          //Set "useSSI":true if your platform url starts with "https://" or else false 
-          messaging=cb.Messaging({"useSSL":false},connectCallback);
-          console.log("connecting to messaging");
-        };
-        var publishMsg=function(event){
-          var msg=document.getElementById("msgPub").value; 
-          console.log("publishing to: "+topic+"with message:"+msg); 
-          messaging.publish(topic, JSON.stringify(msg));
-        }
+
+    function initCallback(err,data){
+      if(err){
+        console.log("init failed")
+      } else {
+        runCodeService()
+      }
+    }
+
+    function runCodeService(){
+        cb.Code().execute("JavascriptService",{},handleServiceResponse)
+    }
+
+    function handleServiceResponse(err, data){
+      if(err){
+        console.log("Failed to run code service: " + JSON.stringify(data))
+      }
+      console.log("Success: " + JSON.stringify(data))
+    }
+
       </script>
     </head>
     <body onload="startup()">
